@@ -253,6 +253,8 @@ public class MenuPrincipal extends AppCompatActivity
 
         } else if (id == R.id.nav_manage) {
             Intent intent = new Intent(this, Competicion.class);
+            intent.putExtra("usuarioNombre",userProfile.getName());
+            intent.putExtra("usuarioEmail", userProfile.getEmail());
             startActivity(intent);
 
 

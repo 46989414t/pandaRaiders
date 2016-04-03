@@ -16,8 +16,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.tallahassee.pandaraiders.R;
+import com.tallahassee.pandaraiders.objetos.UserProfile;
 
 public class Competicion extends AppCompatActivity {
+    public UserProfile userProf;
+
+    public static Bundle bundle;
+    public static String email;
+    public static String nombre;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -42,6 +48,8 @@ public class Competicion extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -53,6 +61,16 @@ public class Competicion extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
+        bundle = getIntent().getExtras();
+        email = bundle.getString("usuarioEmail");
+        nombre = bundle.getString("usuarioNombre");
+
+        System.out.println("desde Competicion previo usuario " + email + "--" + nombre);
+
+        /*userProf.setEmail(email);
+        userProf.setName(nombre);*/
+
+        //System.out.println("desde Competicion usuario "+userProf.getEmail()+"--"+userProf.getName());
 
     }
 
@@ -132,11 +150,15 @@ public class Competicion extends AppCompatActivity {
          * number.
          */
         public static Fragment newInstance(int sectionNumber) {
+
+
+            System.out.println("desde Competicion en instance usuario "+email+"--"+nombre);
+
             System.out.println("NUMERO SECCION "+sectionNumber);
             Fragment fragment = null;
             switch(sectionNumber){
                 case 1:
-                    fragment = new CompeticionFragment1();
+                    fragment = new CompeticionFragment1(email, nombre);
                     break;
                 case 2:
                     fragment = new CompeticionFragment2();

@@ -43,9 +43,6 @@ public class CompeticionFragment1 extends Fragment implements GoogleMap.OnMapCli
     private double latitude;
     private double longitude;
 
-    MapView mapView;
-    private GoogleMap mapa;
-    private final LatLng UPV = new LatLng(39.481106, -0.340987);
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -68,11 +65,17 @@ public class CompeticionFragment1 extends Fragment implements GoogleMap.OnMapCli
             public void onClick(View v) {
                 System.out.println("Actualizando...");
                 actualizarCoordenadas(pathGeneral);
+                actualizarMapa(latitude, longitude, nombre);
             }
         });
 
         actualizarCoordenadas(pathGeneral);
+        actualizarMapa(latitude, longitude, nombre);
 
+        return rootView;
+    }
+
+    private void actualizarMapa(double latitude, double longitude, String nombre) {
         LatLng position = new LatLng(latitude, longitude);
         // Instantiating MarkerOptions class
         MarkerOptions options = new MarkerOptions();
@@ -81,7 +84,7 @@ public class CompeticionFragment1 extends Fragment implements GoogleMap.OnMapCli
         options.position(position);
 
         // Setting title for the MarkerOptions
-        options.title("Position");
+        options.title(nombre);
 
         // Setting snippet for the MarkerOptions
         options.snippet("Latitude:"+latitude+",Longitude:"+longitude);
@@ -90,6 +93,7 @@ public class CompeticionFragment1 extends Fragment implements GoogleMap.OnMapCli
         GoogleMap fm = ((SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.map)).getMap();
 
+        fm.setMapType(GoogleMap.MAP_TYPE_HYBRID);
         // Getting reference to google map
         //GoogleMap googleMap = fm.getMap();
 
@@ -97,20 +101,9 @@ public class CompeticionFragment1 extends Fragment implements GoogleMap.OnMapCli
         fm.addMarker(options);
 
         // Creating CameraUpdate object for position
-        CameraUpdate updatePosition = CameraUpdateFactory.newLatLng(position);
+        CameraUpdate updatePosition = CameraUpdateFactory.newLatLngZoom(position, 17);;
+        fm.animateCamera(updatePosition);
 
-        // Creating CameraUpdate object for zoom
-        CameraUpdate updateZoom = CameraUpdateFactory.zoomBy(4);
-
-        // Updating the camera position to the user input latitude and longitude
-        fm.moveCamera(updatePosition);
-
-        // Applying zoom to the marker position
-        fm.animateCamera(updateZoom);
-
-
-        // Inflate the layout for this fragment
-        return rootView;
     }
 
     private void actualizarCoordenadas(Firebase pathGeneral) {

@@ -127,9 +127,9 @@ public class Competicion extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "SECTION 1";
+                    return "Mi posición";
                 case 1:
-                    return "COMPETIDORES";
+                    return "Competidores Activos";
                 case 2:
                     return "SECTION 3";
             }
@@ -163,7 +163,7 @@ public class Competicion extends AppCompatActivity {
                     fragment = new CompeticionFragment1(email, nombre);
                     break;
                 case 2:
-                    fragment = new CompeticionFragment2();
+                    fragment = new CompeticionFragment2(email, nombre);
                     //fragment = new RaggaeMusicFragment();
                     break;
                 case 3:

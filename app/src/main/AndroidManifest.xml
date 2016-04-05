@@ -55,15 +55,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Funciona.MenuPrincipal" />
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_comp"
-            android:parentActivityName=".Funciona.MenuPrincipal"
-            android:theme="@style/AppTheme.NoActionBar" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Funciona.MenuPrincipal" />
-        </activity>
 
         <activity
             android:name=".Competicion.Competicion"

@@ -6,15 +6,15 @@ package com.tallahassee.pandaraiders.objetos;
 public class Localizacion {
     private String email;
     private double latitud;
-    private double logitud;
+    private double longitud;
 
     public Localizacion() {
     }
 
-    public Localizacion(String email, double latitud, double logitud) {
+    public Localizacion(String email, double latitud, double longitud) {
         this.email = email;
         this.latitud = latitud;
-        this.logitud = logitud;
+        this.longitud = longitud;
     }
 
     public String getEmail() {
@@ -33,11 +33,11 @@ public class Localizacion {
         this.latitud = latitud;
     }
 
-    public double getLogitud() {
-        return logitud;
+    public double getLongitud() {
+        return longitud;
     }
 
-    public void setLogitud(double logitud) {
-        this.logitud = logitud;
+    public void setLongitud(double logitud) {
+        this.longitud = longitud;
     }
 }

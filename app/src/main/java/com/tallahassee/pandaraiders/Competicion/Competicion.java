@@ -40,6 +40,8 @@ public class Competicion extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
+    public static FragmentManager fragmentManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +72,7 @@ public class Competicion extends AppCompatActivity {
         /*userProf.setEmail(email);
         userProf.setName(nombre);*/
 
-        //System.out.println("desde Competicion usuario "+userProf.getEmail()+"--"+userProf.getName());
+
 
     }
 

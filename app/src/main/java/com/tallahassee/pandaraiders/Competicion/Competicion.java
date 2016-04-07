@@ -114,13 +114,27 @@ public class Competicion extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            /*System.out.println("POSICION "+position);
+            switch (position) {
+                case 0:
+                    System.out.println("CASE 0");
+                    return PlaceholderFragment.newInstance(position+1);
+                case 1:
+                    System.out.println("CASE 1");
+                    return PlaceholderFragment.newInstance(position+1);
+                case 2:
+                    System.out.println("CASE 2");
+                    return PlaceholderFragment.newInstance(position+1);
+            }
+            return null;
+*/
+            return PlaceholderFragment.newInstance(position+1);
         }
 
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 2;
         }
 
         @Override
@@ -130,8 +144,8 @@ public class Competicion extends AppCompatActivity {
                     return "Mi posición";
                 case 1:
                     return "Competidores Activos";
-                case 2:
-                    return "SECTION 3";
+                /*case 2:
+                    return "Etapas";*/
             }
             return null;
         }
@@ -166,11 +180,12 @@ public class Competicion extends AppCompatActivity {
                     fragment = new CompeticionFragment2(email, nombre);
                     //fragment = new RaggaeMusicFragment();
                     break;
-                case 3:
-                    fragment = new CompeticionFragment3();
+                /*case 3:
+                    fragment = new CompeticionFragment3(email, nombre);
                     //fragment = new RapMusicFragment();
-                    break;
+                    break;*/
             }
+
             return fragment;
 /*
             if(sectionNumber==1){

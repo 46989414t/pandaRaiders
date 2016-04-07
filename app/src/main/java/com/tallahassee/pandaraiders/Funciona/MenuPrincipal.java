@@ -23,6 +23,7 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.tallahassee.pandaraiders.Competicion.Competicion;
+import com.tallahassee.pandaraiders.Competicion.CompeticionFragment3;
 import com.tallahassee.pandaraiders.R;
 import com.tallahassee.pandaraiders.objetos.Car;
 import com.tallahassee.pandaraiders.objetos.ImagenPerfil;
@@ -257,6 +258,10 @@ public class MenuPrincipal extends AppCompatActivity
             intent.putExtra("usuarioEmail", userProfile.getEmail());
             startActivity(intent);
 
+
+        } else if (id == R.id.nav_etapa) {
+        fragment = new CompeticionFragment3();
+        transaccion = true;
 
         } else if (id == R.id.nav_share) {
 

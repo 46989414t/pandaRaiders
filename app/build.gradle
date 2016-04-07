@@ -34,5 +34,6 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:1.3.0'//libreria para imagen circular
     compile 'com.google.android.gms:play-services-maps:8.4.0'
     compile 'com.google.android.gms:play-services-location:8.4.0'
+    //compile 'com.google.maps.android:android-maps-utils:x.y.z'
 
 }

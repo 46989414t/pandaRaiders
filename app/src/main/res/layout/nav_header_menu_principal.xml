@@ -19,10 +19,11 @@
             android:paddingTop="@dimen/nav_header_vertical_spacing"
 
             android:id="@+id/idImagenPerfil"
-            android:onClick="cambiarImagen" />
+            android:onClick="cambiarImagen"
+            android:background="@drawable/insertphotohere" />
 
         <Space
-            android:layout_width="110dp"
+            android:layout_width="90dp"
             android:layout_height="20px" />
 
         <LinearLayout

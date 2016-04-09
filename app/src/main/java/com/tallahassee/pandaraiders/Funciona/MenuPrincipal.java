@@ -1,10 +1,15 @@
 package com.tallahassee.pandaraiders.Funciona;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
@@ -15,6 +20,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,6 +36,8 @@ import com.tallahassee.pandaraiders.objetos.ImagenPerfil;
 import com.tallahassee.pandaraiders.objetos.User;
 import com.tallahassee.pandaraiders.objetos.UserProfile;
 
+import java.io.File;
+
 public class MenuPrincipal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -43,7 +51,7 @@ public class MenuPrincipal extends AppCompatActivity
     public static ImagenPerfil imgPerfil = new ImagenPerfil();
 
     //--Navigation Bar
-    private ImageView imagenPerfil;
+
     public  TextView userName;
     public TextView carMarca;
     public TextView carModelo;
@@ -52,7 +60,14 @@ public class MenuPrincipal extends AppCompatActivity
     //---Fin navigation
 
     //---imagen Perfil
-    private static final int SELECT_PICTURE = 1;
+    private String DIRECTORY = "myPictureApp/";
+    private String MEDIA_DIRECTORY = DIRECTORY+"media";
+    private String TEMPORAL_PICTURE_NAME ="temporal.jpg";
+    private final  int PHOTO_CODE = 100;
+    private static int SELECT_PICTURE = 200;
+    private ImageView imagenPerfil;
+
+    //----
     private ImageView imagenDeGaleria;
     private ImageView imagenDeGaleriaPost;
     private String selectedImagePath;
@@ -83,6 +98,8 @@ public class MenuPrincipal extends AppCompatActivity
         Firebase pathGeneral = new Firebase(rutaGeneral);
 
 
+        imagenPerfil = (ImageView) findViewById(R.id.idImagenPerfil);
+
         //---Cast Navgation Bar
 
         //imagenDeGaleriaPost = (ImageView) findViewById(R.id.idImagenPerfil);
@@ -109,7 +126,7 @@ public class MenuPrincipal extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_principal, menu);
+        //getMenuInflater().inflate(R.menu.menu_principal, menu);
 
 
         imagenPerfil = (ImageView) findViewById(R.id.idImagenPerfil);
@@ -144,7 +161,7 @@ public class MenuPrincipal extends AppCompatActivity
             public void onDataChange(DataSnapshot snapshot) {
                 System.out.println("La foto: " + snapshot.getValue());
                 String valorFoto = snapshot.child("userProfile_" + identificadorOk).child("fotoPerfil").getValue().toString();
-                System.out.println("VALOR FOTO: "+valorFoto);
+                System.out.println("VALOR FOTO: " + valorFoto);
                 //cargarBitmapStringToImageView(valorFoto);
             }
 
@@ -310,5 +327,93 @@ public class MenuPrincipal extends AppCompatActivity
     }
 
 
+    public void cambiarImagen(View view) {
+        System.out.println("ha clicado en la foto");
+        final CharSequence[] opciones = {"Tomar Foto", "Seleccionar de la Galería"};
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+        alertBuilder.setTitle("Seleccione Opción");
+        alertBuilder.setItems(opciones, new DialogInterface.OnClickListener() {
 
+            @Override
+            public void onClick(DialogInterface dialog, int seleccion) {
+                if (opciones[seleccion].equals("Tomar Foto")) {
+                    openCamera();
+                } else if (opciones[seleccion].equals("Seleccionar de la Galería")) {
+                    openGaleria();
+                }
+            }
+        });
+        alertBuilder.setCancelable(false)
+                .setNegativeButton("Cancelar",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+        // create an alert dialog
+        alertBuilder.create();
+        alertBuilder.show();
+
+
+    }
+
+    private void openGaleria() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setType("image/*");
+        startActivityForResult(Intent.createChooser(intent, "Selecciona imagen"), SELECT_PICTURE);
+    }
+
+    private void openCamera() {
+        File file = new File(Environment.getExternalStorageDirectory(), MEDIA_DIRECTORY);
+        file.mkdirs();
+
+        String path = Environment.getExternalStorageDirectory() + File.separator + MEDIA_DIRECTORY +
+                File.separator +TEMPORAL_PICTURE_NAME;
+
+        File newFile = new File(path);
+
+        //abrir la camara
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(newFile));
+        startActivityForResult(intent, PHOTO_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //para saber de donde viene la respuesta galeria o camara
+        /*switch (requestCode){
+            case PHOTO_CODE:
+                if(resultCode == RESULT_OK){
+                    //direccion de la imagen camara
+                    String dir = Environment.getExternalStorageDirectory() + File.separator + MEDIA_DIRECTORY +
+                            File.separator +TEMPORAL_PICTURE_NAME;
+                    decodeBitmap(dir);
+
+                }
+                break;
+            case SELECT_PICTURE:
+                if(resultCode == RESULT_OK){
+                    Uri path = data.getData();
+                    imagenPerfil.setImageURI(path);
+                }
+        }*/
+        if(requestCode == PHOTO_CODE && resultCode == RESULT_OK){
+            String dir = Environment.getExternalStorageDirectory() + File.separator + MEDIA_DIRECTORY +
+                    File.separator +TEMPORAL_PICTURE_NAME;
+            decodeBitmap(dir);
+        }
+        else{
+            Uri path = data.getData();
+            imagenPerfil.setImageURI(path);
+        }
+    }
+
+    private void decodeBitmap(String dir) {
+        Bitmap bitmap;
+        bitmap = BitmapFactory.decodeFile(dir);
+
+        imagenPerfil.setImageBitmap(bitmap);
+    }
 }

@@ -259,9 +259,9 @@ public class MenuPrincipal extends AppCompatActivity
         boolean transaccion= false;
 
 
-        if (id == R.id.nav_camara) {
+        /*if (id == R.id.nav_camara) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        }*/ if (id == R.id.nav_gallery) {
             fragment = new Comunidad(userProfile);
             transaccion = true;
 
@@ -280,11 +280,11 @@ public class MenuPrincipal extends AppCompatActivity
         fragment = new CompeticionFragment3();
         transaccion = true;
 
-        } else if (id == R.id.nav_share) {
+        } /*else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
 
-        }
+        }*/
 
         if(transaccion){
             getSupportFragmentManager().beginTransaction()

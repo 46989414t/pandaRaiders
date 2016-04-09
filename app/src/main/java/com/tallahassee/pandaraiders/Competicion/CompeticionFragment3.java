@@ -99,6 +99,51 @@ public class CompeticionFragment3 extends Fragment {
                 View promptView = layoutInflater.inflate(R.layout.pop_up_mapa_etapa, null);
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
                 alertDialogBuilder.setView(promptView);
+               /* LatLng salida = new LatLng(menElegido.getLatIncio(),menElegido.getLongIncio());
+                LatLng llegada = new LatLng(menElegido.getLatFinal(),menElegido.getLongFinal());
+
+                MarkerOptions option1 = new MarkerOptions();
+                MarkerOptions option2 = new MarkerOptions();
+
+                option1.position(salida);
+                option2.position(llegada);
+
+                option1.title(menElegido.getInicio());
+                option2.title(menElegido.getFin());
+                SupportMapFragment fm = ((SupportMapFragment) getActivity().getSupportFragmentManager().
+                        findFragmentById(R.id.map));
+                fm.getMapAsync((OnMapReadyCallback) getActivity());
+
+                GoogleMap fm = ((SupportMapFragment) getChildFragmentManager()
+                        .findFragmentById(R.id.map)).getMap();
+
+                fm.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+                // Getting reference to google map
+                //GoogleMap googleMap = fm.getMap();
+
+                // Adding Marker on the Google Map
+                fm.addMarker(option1);
+                fm.addMarker(option2);*/
+
+
+
+
+/*
+
+                GoogleMap googleMap;
+
+                googleMap = ((SupportMapFragment) getChildFragmentManager()
+                        .findFragmentById(R.id.map)).getMap();
+
+                googleMap
+                        .addPolyline((new PolylineOptions())
+                                .add(salida, llegada).width(5).color(Color.BLUE)
+                                .geodesic(true));
+                // move camera to zoom on map
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(salida,
+                        5));*/
+
+                //cargarPuntos(menElegido);
                 //final TextView usuarioRespuesta = (TextView)promptView.findViewById(R.id.idUsuarioRespuesta);
                 //usuarioRespuesta.setText(menRemitente);
                 //final EditText editText = (EditText) promptView.findViewById(R.id.edittext);
@@ -117,6 +162,24 @@ public class CompeticionFragment3 extends Fragment {
                 alert.show();
             }
         });
+
+    }
+
+    private void cargarPuntos(Etapa menElegido) {
+ /*       LatLng salida = new LatLng(menElegido.getLatIncio(),menElegido.getLongIncio());
+        LatLng llegada = new LatLng(menElegido.getLatFinal(),menElegido.getLongFinal());
+
+
+        googleMap = ((SupportMapFragment) getChildFragmentManager()
+                .findFragmentById(R.id.map)).getMap();
+
+        googleMap
+                .addPolyline((new PolylineOptions())
+                        .add(salida, llegada).width(5).color(Color.BLUE)
+                        .geodesic(true));
+        // move camera to zoom on map
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(salida,
+                5));*/
 
     }
 

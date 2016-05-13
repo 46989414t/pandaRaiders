@@ -28,12 +28,13 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.1.1'
-    compile 'com.android.support:design:23.1.1'
-    compile 'com.firebase:firebase-client-android:2.5.2+'
-    compile 'de.hdodenhof:circleimageview:1.3.0'//libreria para imagen circular
-    compile 'com.google.android.gms:play-services-maps:8.4.0'
-    compile 'com.google.android.gms:play-services-location:8.4.0'
+    //libreria para imagen circular
     //compile 'com.google.maps.android:android-maps-utils:x.y.z'
 
+    compile 'com.android.support:appcompat-v7:24.0.0-alpha2'
+    compile 'com.android.support:design:24.0.0-alpha2'
+    compile 'com.firebase:firebase-client-android:2.5.2+'
+    compile 'de.hdodenhof:circleimageview:1.3.0'
+    compile 'com.google.android.gms:play-services-maps:8.4.0'
+    compile 'com.google.android.gms:play-services-location:8.4.0'
 }

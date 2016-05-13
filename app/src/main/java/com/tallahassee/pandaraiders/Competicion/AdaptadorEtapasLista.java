@@ -1,4 +1,4 @@
-package com.tallahassee.pandaraiders.Funciona;
+package com.tallahassee.pandaraiders.Competicion;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,19 +8,20 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.tallahassee.pandaraiders.R;
-import com.tallahassee.pandaraiders.objetos.UserProfile;
+import com.tallahassee.pandaraiders.objetos.Etapa;
 
 import java.util.ArrayList;
+
 
 /**
  * Created by enric on 27/3/16.
  */
-public class ListviewContactAdapter extends BaseAdapter {
-    private static ArrayList<UserProfile> listContact;
+public class AdaptadorEtapasLista extends BaseAdapter {
+    private static ArrayList<Etapa> listContact;
 
     private LayoutInflater mInflater;
 
-    public ListviewContactAdapter(Context photosFragment, ArrayList<UserProfile> results){
+    public AdaptadorEtapasLista(Context photosFragment, ArrayList<Etapa> results){
         listContact = results;
         mInflater = LayoutInflater.from(photosFragment);
     }
@@ -48,23 +49,31 @@ public class ListviewContactAdapter extends BaseAdapter {
         // TODO Auto-generated method stub
         ViewHolder holder;
         if(convertView == null){
-            convertView = mInflater.inflate(R.layout.item_lista_usuarios, null);
+            convertView = mInflater.inflate(R.layout.item_etapa, null);
             holder = new ViewHolder();
-            holder.txtname = (TextView) convertView.findViewById(R.id.idUserNameAdapter);
-           // holder.txtphone = (TextView) convertView.findViewById(R.id.lv_contact_item_phone);
+            holder.txtnombre = (TextView) convertView.findViewById(R.id.idNombreEtapa);
+            holder.txtinicio = (TextView) convertView.findViewById(R.id.idInicioEtapa);
+            holder.txtFin = (TextView) convertView.findViewById(R.id.idFinEtapa);
+            holder.txtDescripcion = (TextView) convertView.findViewById(R.id.idDescripcionEtapa);
 
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.txtname.setText(listContact.get(position).getName());
+        holder.txtnombre.setText(listContact.get(position).getNombre());
+        holder.txtinicio.setText(listContact.get(position).getInicio());
+        holder.txtFin.setText(listContact.get(position).getFin());
+        holder.txtDescripcion.setText(listContact.get(position).getDescripcion());
         //holder.txtphone.setText(listContact.get(position).GetPhone());
 
         return convertView;
     }
 
     static class ViewHolder{
-        TextView txtname;
+        TextView txtnombre;
+        TextView txtinicio;
+        TextView txtFin;
+        TextView txtDescripcion;
     }
 }

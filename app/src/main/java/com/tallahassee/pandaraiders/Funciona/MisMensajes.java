@@ -187,6 +187,7 @@ public class MisMensajes extends Fragment {
                             public void onClick(DialogInterface dialog, int id) {
                                 //resultText.setText("Hello, " + editText.getText());
                                 enviarMensaje(menRemitente, editText, pathGeneral);
+
                             }
                         })
                         .setNegativeButton("Cancel",

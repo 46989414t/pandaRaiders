@@ -36,7 +36,7 @@ public class PerfilVisita extends AppCompatActivity {
         Firebase.setAndroidContext(this);
         final Firebase pathGeneral = new Firebase(rutaGeneral);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         emailVisita = (TextView) findViewById(R.id.idEmailVisita);
         Bundle bundle = getIntent().getExtras();
